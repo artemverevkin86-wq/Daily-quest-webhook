@@ -16,4 +16,4 @@ jobs:
       - run: pip install requests
       - run: python bot.py
         env:
-          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WHOOK }}
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
