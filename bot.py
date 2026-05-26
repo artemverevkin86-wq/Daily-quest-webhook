@@ -18,11 +18,6 @@ def get_today_task(tasks):
 def send_to_discord(task):
     today = datetime.now().strftime('%d.%m.%Y')
     
-    # Здесь НЕТ имени вебхука и НЕТ аватарки — только чистое сообщение
-    payload = {
-        "content": f"📅 **Задание на {today}**\n\n{task}"
-    }
-    
     r = requests.post(WEBHOOK, json=payload)
     print(f"Статус: {r.status_code}")
     if r.status_code == 204:
