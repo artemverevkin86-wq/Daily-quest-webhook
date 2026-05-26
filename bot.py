@@ -1,12 +1,12 @@
 import requests
 import os
 from datetime import datetime
+import json
 
 WEBHOOK = os.environ.get('DISCORD_WEBHOOK')
 
 def load_tasks():
     with open('tasks.json', 'r', encoding='utf-8') as f:
-        import json
         data = json.load(f)
     return data['tasks']
 
@@ -18,12 +18,12 @@ def get_today_task(tasks):
 def send_to_discord(task):
     today = datetime.now().strftime('%d.%m.%Y')
     
+    payload = {
+        "content": f"{task}"
+    }
+    
     r = requests.post(WEBHOOK, json=payload)
     print(f"Статус: {r.status_code}")
-    if r.status_code == 204:
-        print("✅ Отправлено!")
-    else:
-        print(f"❌ Ошибка: {r.text}")
 
 if __name__ == "__main__":
     if not WEBHOOK:
